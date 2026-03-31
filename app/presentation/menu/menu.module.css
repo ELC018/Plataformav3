@@ -1,13 +1,13 @@
-/* ===== ESTILOS ORIGINALES ===== */
 
-/* Barra de navegación */
+
+
 .navbar {
   background-color: #006064;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
 }
 
-/* Logo */
+
 .logo {
   font-size: 1.5rem;
   font-weight: 800;
@@ -16,10 +16,10 @@
   transition: color 0.2s;
 }
 .logo:hover {
-  color: #2563eb; /* azul, se mantiene como estaba */
+  color: #2563eb; 
 }
 
-/* Botón de menú (hamburguesa) */
+
 .menuButton {
   background: transparent;
   border: none;
@@ -31,7 +31,7 @@
   color: #1f2937;
 }
 
-/* Enlaces del menú (tanto desktop como móvil) */
+
 .link {
   color: #ffffff;
   text-decoration: none;
@@ -39,24 +39,24 @@
   transition: color 0.2s;
 }
 .link:hover {
-  color: #ffff00; /* amarillo */
+  color: #ffff00; 
 }
 
-/* Menú desktop (contenedor) */
+
 .desktopMenu {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* Menú móvil desplegable */
+
 .mobileMenu {
   background-color: #006064;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   border-top: 1px solid #e5e7eb;
 }
 
-/* Iconos sociales */
+
 .socialLink {
   color: #ffffff;
   transition: color 0.2s;
@@ -65,9 +65,7 @@
   color: #ffff00;
 }
 
-/* ===== NUEVOS ESTILOS PARA SUBMENÚ ===== */
 
-/* Botón del ítem con submenú (Académico) */
 .linkButton {
   background: none;
   border: none;
@@ -84,7 +82,7 @@
   color: #ffff00;
 }
 
-/* Submenú desktop */
+
 .submenu {
   position: absolute;
   left: 0;
@@ -99,7 +97,7 @@
   list-style: none;
 }
 
-/* Enlaces dentro del submenú desktop */
+
 .submenuLink {
   display: block;
   padding: 0.5rem 1rem;
@@ -113,12 +111,12 @@
   color: #ffff00;
 }
 
-/* Rotación del ícono ChevronDown */
+
 .rotate {
   transform: rotate(180deg);
 }
 
-/* Submenú en móvil (acordeón) */
+
 .mobileSubmenu {
   margin-left: 1rem;
   margin-top: 0.5rem;
@@ -126,7 +124,7 @@
   padding-left: 0.5rem;
 }
 
-/* Enlaces dentro del submenú móvil */
+
 .mobileSubmenuLink {
   display: block;
   padding: 0.5rem 0.5rem 0.5rem 1rem;

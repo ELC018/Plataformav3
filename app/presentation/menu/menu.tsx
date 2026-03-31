@@ -10,7 +10,7 @@ const menuItems = [
   { name: 'Carrera', path: '/presentation/Carrera' },
   {
     name: 'Academico',
-    path: '#', // El padre no navega, solo abre submenú
+    path: '#', 
     submenu: [
       { name: 'Saga', path: '/academico/saga' },
       { name: 'Chat', path: '/academico/chat' },
@@ -34,8 +34,8 @@ const socialIcons = [
 
 export default function Menu() {
   const [isOpen, setIsOpen] = useState(false)
-  const [openSubmenu, setOpenSubmenu] = useState(false)      // para desktop
-  const [openMobileSubmenu, setOpenMobileSubmenu] = useState(false) // para móvil
+  const [openSubmenu, setOpenSubmenu] = useState(false)
+  const [openMobileSubmenu, setOpenMobileSubmenu] = useState(false)
 
   const toggleMenu = () => setIsOpen(!isOpen)
   const toggleSubmenu = () => setOpenSubmenu(!openSubmenu)
@@ -49,7 +49,7 @@ export default function Menu() {
           Mi Sitio {isOpen ? '🔓' : '🔒'}
         </h1>
 
-        {/* Botón hamburguesa (solo móvil) */}
+        
         <button
           className={`${styles.menuButton} md:hidden p-2 rounded-md`}
           onClick={toggleMenu}
@@ -58,7 +58,7 @@ export default function Menu() {
           {isOpen ? <X size={24} /> : <MenuIcon size={24} />}
         </button>
 
-        {/* ========== MENÚ DESKTOP ========== */}
+        
         <div className="hidden md:flex items-center space-x-8">
           <ul className={`${styles.desktopMenu} flex space-x-8`}>
             {menuItems.map((item, index) => (
@@ -101,7 +101,7 @@ export default function Menu() {
           </ul>
           <p></p>
 
-          {/* Separador e iconos sociales en desktop */}
+          
           <span className="w-px h-6 bg-white/30"></span>
           <ul className="flex space-x-4">
             {socialIcons.map((social, index) => (
@@ -120,7 +120,7 @@ export default function Menu() {
           </ul>
         </div>
 
-        {/* ========== MENÚ MÓVIL DESPLEGABLE ========== */}
+        
         {isOpen && (
           <div className={`${styles.mobileMenu} absolute top-16 left-0 w-full md:hidden`}>
             <ul className="flex flex-col p-4 space-y-3">
@@ -170,7 +170,7 @@ export default function Menu() {
               ))}
             </ul>
 
-            {/* Iconos sociales en móvil */}
+            
             <div className="border-t border-white/20 mt-2 pt-4 px-4 pb-2">
               <ul className="flex justify-center space-x-6">
                 {socialIcons.map((social, index) => (
