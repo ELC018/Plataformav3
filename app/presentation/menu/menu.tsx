@@ -12,16 +12,16 @@ const menuItems = [
     name: 'Academico',
     path: '#', 
     submenu: [
-      { name: 'Saga', path: '/academico/saga' },
-      { name: 'Chat', path: '/academico/chat' },
-      { name: 'Consultas', path: '/academico/consultas' },
-      { name: 'Información', path: '/academico/informacion' },
-      { name: 'Repositorio', path: '/academico/repositorio' },
-      { name: 'Biblioteca', path: '/academico/biblioteca' }
+      { name: 'Saga', path: 'https://saga.infocallp.info/backend/web/user/login.html' },
+      { name: 'Chat', path: '/presentation/academico/chat' },
+      { name: 'Consultas', path: '/presentation/academico/consultas' },
+      { name: 'Información', path: '/presentation/academico/infor' },
+      { name: 'Repositorio', path: '/presentation/academico/repositorio' },
+      { name: 'Biblioteca', path: '/presentation/academico/biblioteca' }
     ]
   },
   { name: 'Galeria', path: '/presentation/galeria' },
-  { name: 'Avisos', path: '/avisos' }
+  { name: 'Avisos', path: '/presentation/avisos' }
 ]
 
 
