@@ -1,0 +1,394 @@
+:root {
+  --bg-light: #eef2f5;
+  --glass-light-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --text-dark: #1e2a3e;
+  --text-muted: #4a5568;
+  --accent: #2c7da0;
+  --accent-light: #61a5c2;
+  --radius-lg: 1.5rem;
+  --radius-md: 1rem;
+  --transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.carrera-page {
+  background: var(--bg-light);
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  color: var(--text-dark);
+}
+
+/* Sección top */
+.section-top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.carousel-wrapper {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.05),
+              -4px -4px 12px rgba(255, 255, 255, 0.8);
+}
+
+.carousel {
+  position: relative;
+  background: #000;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  position: relative;
+  height: 100%;
+}
+
+.carousel-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: #fff;
+  padding: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--glass-light-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  font-size: 1.8rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 10;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05),
+              -3px -3px 8px rgba(255, 255, 255, 0.9);
+}
+
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05),
+              -2px -2px 6px rgba(255, 255, 255, 0.9);
+}
+
+.carousel-btn--prev { left: 1rem; }
+.carousel-btn--next { right: 1rem; }
+
+.carousel-dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.3);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.carousel-dot.active,
+.carousel-dot:hover {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+.text-box {
+  background: var(--glass-light-bg);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid var(--glass-border);
+  box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.05),
+              -8px -8px 16px rgba(255, 255, 255, 0.8);
+}
+
+.text-box__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 0.25rem;
+}
+
+.text-box p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Plan de estudios */
+.section-plan {
+  width: 100%;
+  background: transparent;
+  padding: 0;
+}
+
+.section-plan__title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 2rem;
+  text-align: center;
+}
+
+.plan-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.plan-card {
+  background: var(--glass-light-bg);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid var(--glass-border);
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.06),
+              -10px -10px 20px rgba(255, 255, 255, 0.8);
+}
+
+.plan-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.04),
+              -6px -6px 12px rgba(255, 255, 255, 0.9);
+}
+
+.plan-card__img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #ccc;
+}
+
+.plan-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.plan-card:hover .plan-card__img img {
+  transform: scale(1.03);
+}
+
+.plan-card__body {
+  padding: 1.5rem;
+}
+
+.plan-card__body h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 1rem;
+}
+
+.materias-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.materia-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 0.6rem;
+}
+
+.materia-nombre {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  cursor: pointer;
+  padding: 0.25rem 0;
+  transition: all 0.2s;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.materia-nombre:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.materia-descripcion {
+  margin-top: 0.6rem;
+  padding: 0.8rem;
+  background: rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  animation: fadeIn 0.2s ease;
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.02),
+              inset -2px -2px 5px rgba(255,255,255,0.7);
+}
+
+.materia-cerrar {
+  margin-top: 0.6rem;
+  background: rgba(0,0,0,0.05);
+  border: none;
+  border-radius: 2rem;
+  padding: 0.3rem 1rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: var(--transition);
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.02),
+              -1px -1px 3px rgba(255,255,255,0.8);
+}
+
+.materia-cerrar:hover {
+  background: rgba(0,0,0,0.1);
+  transform: scale(0.98);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sección "Por qué estudiar con nosotros" */
+.section-nos {
+  background: transparent;
+  border-radius: var(--radius-lg);
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.nos-titulo {
+  color: var(--text-dark);
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
+.nos-grid {
+  display: grid;
+  gap: 2rem 1.8rem;
+}
+
+.nos-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.nos-grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Tarjetas claras con Glass + Neumorfismo */
+.nos-card {
+  background: var(--glass-light-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.5rem;
+  padding: 1.8rem 1.2rem;
+  text-align: center;
+  transition: var(--transition);
+  color: var(--text-dark);
+  box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.05),
+              -8px -8px 16px rgba(255, 255, 255, 0.7);
+}
+
+.nos-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.04),
+              -4px -4px 10px rgba(255, 255, 255, 0.9);
+}
+
+.nos-card__icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));
+}
+
+.nos-card__titulo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 0.75rem;
+}
+
+.nos-card__texto {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .section-top {
+    grid-template-columns: 1fr;
+  }
+  .plan-cards {
+    grid-template-columns: 1fr;
+  }
+  .nos-grid--3,
+  .nos-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .carrera-page {
+    padding: 1rem;
+  }
+  .nos-grid--3,
+  .nos-grid--4 {
+    grid-template-columns: 1fr;
+  }
+  .text-box__title {
+    font-size: 1.1rem;
+  }
+}

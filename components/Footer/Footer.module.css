@@ -1,0 +1,90 @@
+.footer {
+  background-color: #006064;
+  color: #ffffff;
+  margin-top: auto;
+  box-shadow: 0 -4px 6px -1px rgba(0,0,0,0.1),
+              0 -2px 4px -1px rgba(0,0,0,0.06);
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.section {
+  flex: 1;
+  min-width: 240px;
+}
+
+.section h3 {
+  color: #f8fc03;
+  margin-bottom: 1rem;
+  font-size: 1.15rem;
+}
+
+.section p {
+  margin: .45rem 0;
+  color: #ffffff;
+  font-size: .95rem;
+  line-height: 1.6;
+}
+
+/* Redes sociales */
+
+.socialList {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.socialLink {
+  color: #ffffff;
+  transition: color .2s;
+}
+
+.socialLink:hover {
+  color: #f8fc03;
+}
+
+/* Parte inferior */
+
+.bottom {
+  border-top: 1px solid rgba(255,255,255,.2);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 1rem;
+
+  padding: 1.2rem 2rem;
+}
+
+.bottom p {
+  margin: 0;
+  font-size: .9rem;
+}
+
+.links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.links a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.links a:hover {
+  color: #f8fc03;
+}

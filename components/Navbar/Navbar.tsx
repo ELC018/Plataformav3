@@ -1,55 +1,96 @@
 'use client'
 
 import { useState } from 'react'
-import { Menu as MenuIcon, X, Facebook, Twitter, Instagram, Youtube, ChevronDown } from 'lucide-react'
-import styles from './menu.module.css'
+import { usePathname } from 'next/navigation'
+import { Menu as MenuIcon, X, Facebook, Twitter, Instagram, Youtube, ChevronDown, LogIn, LogOut, User } from 'lucide-react'
+import styles from './Navbar.module.css'
 import Link from 'next/link'
 
-const menuItems = [
-  { name: 'Inicio', path: '/' },
-  { name: 'Carrera', path: '/presentation/Carrera' },
+
+type Rol = 'externo' | 'estudiante' | 'egresado' | 'docente' | 'jefa_carrera'
+
+interface SubMenuItem {
+  name: string
+  path: string
+}
+
+interface MenuItem {
+  name: string
+  path: string
+  submenu?: SubMenuItem[]
+  soloAutenticado?: boolean
+}
+
+interface Usuario {
+  nombre: string
+  rol: Rol
+}
+
+
+const menuItems: MenuItem[] = [
+  { name: 'Inicio',           path: '/' },
+  { name: 'Carrera',          path: '/presentation/Carrera' },
   {
-    name: 'Academico',
-    path: '#', 
+    name: 'Académico',
+    path: '#',
+    soloAutenticado: true,
     submenu: [
-      { name: 'Saga', path: 'https://saga.infocallp.info/backend/web/user/login.html' },
-      { name: 'Chat', path: '/presentation/academico/chat' },
-      { name: 'Consultas', path: '/presentation/academico/consultas' },
+      { name: 'Saga',        path: 'https://saga.infocallp.info/backend/web/user/login.html' },
+      { name: 'Chat',        path: '/presentation/academico/chat' },
+      
       { name: 'Información', path: '/presentation/academico/infor' },
       { name: 'Repositorio', path: '/presentation/academico/repositorio' },
-      { name: 'Biblioteca', path: '/presentation/academico/biblioteca' }
-    ]
+      { name: 'Biblioteca',  path: '/presentation/academico/biblioteca' },
+    ],
   },
-  { name: 'Galeria', path: '/presentation/galeria' },
-  { name: 'Avisos', path: '/presentation/avisos' }
+  { name: 'Galería',          path: '/presentation/galeria' },
+  { name: 'Avisos Laborales', path: '/presentation/avisos' },
 ]
-
 
 const socialIcons = [
-  { icon: Facebook, url: 'https://facebook.com', label: 'Facebook' },
-  { icon: Twitter, url: 'https://twitter.com', label: 'Twitter' },
+  { icon: Facebook,  url: 'https://facebook.com',  label: 'Facebook' },
+  { icon: Twitter,   url: 'https://twitter.com',   label: 'Twitter' },
   { icon: Instagram, url: 'https://instagram.com', label: 'Instagram' },
-  { icon: Youtube, url: 'https://youtube.com', label: 'YouTube' }
+  { icon: Youtube,   url: 'https://youtube.com',   label: 'YouTube' },
 ]
 
-export default function Menu() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [openSubmenu, setOpenSubmenu] = useState(false)
-  const [openMobileSubmenu, setOpenMobileSubmenu] = useState(false)
 
-  const toggleMenu = () => setIsOpen(!isOpen)
-  const toggleSubmenu = () => setOpenSubmenu(!openSubmenu)
-  const toggleMobileSubmenu = () => setOpenMobileSubmenu(!openMobileSubmenu)
+function esAutenticado(rol: Rol): boolean {
+  return rol !== 'externo'
+}
+
+
+export default function Navbar() {
+  const [isOpen,            setIsOpen]            = useState<boolean>(false)
+  const [openSubmenu,       setOpenSubmenu]       = useState<boolean>(false)
+  const [openMobileSubmenu, setOpenMobileSubmenu] = useState<boolean>(false)
+
+  
+  const [usuario, setUsuario] = useState<Usuario | null>({ nombre: 'Juan', rol: 'estudiante' })
+  
+
+  const pathname = usePathname()
+  const autenticado = usuario ? esAutenticado(usuario.rol) : false
+
+  const toggleMenu          = () => setIsOpen(o => !o)
+  const toggleSubmenu       = () => setOpenSubmenu(o => !o)
+  const toggleMobileSubmenu = () => setOpenMobileSubmenu(o => !o)
+
+  // Filtra ítems según rol
+  const itemsVisibles = menuItems.filter(item =>
+    item.soloAutenticado ? autenticado : true
+  )
 
   return (
     <nav className={`${styles.navbar} sticky top-0 z-50`}>
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
-        {/* Logo */}
-        <h1 className={`${styles.logo} cursor-pointer`} onClick={toggleMenu}>
-          Mi Sitio {isOpen ? '🔓' : '🔒'}
-        </h1>
 
         
+        <Link href="/" className={styles.logo}>
+          Mi Sitio 🔒
+        </Link>
+
+       
         <button
           className={`${styles.menuButton} md:hidden p-2 rounded-md`}
           onClick={toggleMenu}
@@ -61,14 +102,11 @@ export default function Menu() {
         
         <div className="hidden md:flex items-center space-x-8">
           <ul className={`${styles.desktopMenu} flex space-x-8`}>
-            {menuItems.map((item, index) => (
+            {itemsVisibles.map((item, index) => (
               <li key={index} className="relative">
                 {item.submenu ? (
                   <div>
-                    <button
-                      onClick={toggleSubmenu}
-                      className={styles.linkButton}
-                    >
+                    <button onClick={toggleSubmenu} className={styles.linkButton}>
                       {item.name}
                       <ChevronDown
                         size={16}
@@ -92,17 +130,21 @@ export default function Menu() {
                     )}
                   </div>
                 ) : (
-                  <Link href={item.path} className={styles.link}>
+                  <Link
+                    href={item.path}
+                    className={`${styles.link} ${pathname === item.path ? styles.linkActive : ''}`}
+                  >
                     {item.name}
                   </Link>
                 )}
               </li>
             ))}
           </ul>
-          <p></p>
 
           
-          <span className="w-px h-6 bg-white/30"></span>
+          <span className="w-px h-6 bg-white/30" />
+
+          
           <ul className="flex space-x-4">
             {socialIcons.map((social, index) => (
               <li key={index}>
@@ -118,13 +160,37 @@ export default function Menu() {
               </li>
             ))}
           </ul>
+
+         
+          <span className="w-px h-6 bg-white/30" />
+
+          
+          {autenticado && usuario ? (
+            <div className={styles.userArea}>
+              <User size={16} />
+              <span className={styles.userName}>{usuario.nombre}</span>
+              <span className={styles.userRol}>{usuario.rol}</span>
+              <button
+                className={styles.authBtn}
+                onClick={() => setUsuario(null)}
+                title="Cerrar sesión"
+              >
+                <LogOut size={18} />
+              </button>
+            </div>
+          ) : (
+            <Link href="/login" className={styles.authBtn} title="Iniciar sesión">
+              <LogIn size={18} />
+              <span>Ingresar</span>
+            </Link>
+          )}
         </div>
 
         
         {isOpen && (
           <div className={`${styles.mobileMenu} absolute top-16 left-0 w-full md:hidden`}>
             <ul className="flex flex-col p-4 space-y-3">
-              {menuItems.map((item, index) => (
+              {itemsVisibles.map((item, index) => (
                 <li key={index}>
                   {item.submenu ? (
                     <div>
@@ -145,10 +211,7 @@ export default function Menu() {
                               <Link
                                 href={sub.path}
                                 className={styles.mobileSubmenuLink}
-                                onClick={() => {
-                                  toggleMenu()
-                                  setOpenMobileSubmenu(false)
-                                }}
+                                onClick={() => { toggleMenu(); setOpenMobileSubmenu(false) }}
                               >
                                 {sub.name}
                               </Link>
@@ -160,7 +223,7 @@ export default function Menu() {
                   ) : (
                     <Link
                       href={item.path}
-                      className={`${styles.link} block py-2 px-4 rounded`}
+                      className={`${styles.link} ${pathname === item.path ? styles.linkActive : ''} block py-2 px-4 rounded`}
                       onClick={toggleMenu}
                     >
                       {item.name}
@@ -171,7 +234,7 @@ export default function Menu() {
             </ul>
 
             
-            <div className="border-t border-white/20 mt-2 pt-4 px-4 pb-2">
+            <div className="border-t border-white/20 mt-2 pt-4 px-4 pb-4 flex flex-col gap-4">
               <ul className="flex justify-center space-x-6">
                 {socialIcons.map((social, index) => (
                   <li key={index}>
@@ -188,6 +251,26 @@ export default function Menu() {
                   </li>
                 ))}
               </ul>
+
+              {autenticado && usuario ? (
+                <div className={styles.mobileUserArea}>
+                  <span>{usuario.nombre} — {usuario.rol}</span>
+                  <button
+                    className={styles.mobileAuthBtn}
+                    onClick={() => { setUsuario(null); toggleMenu() }}
+                  >
+                    <LogOut size={16} /> Cerrar sesión
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  className={styles.mobileAuthBtn}
+                  onClick={toggleMenu}
+                >
+                  <LogIn size={16} /> Ingresar
+                </Link>
+              )}
             </div>
           </div>
         )}

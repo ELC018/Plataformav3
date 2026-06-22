@@ -1,10 +1,18 @@
 import type { NextConfig } from 'next';
-
+ 
 const nextConfig: NextConfig = {
   turbopack: {
-    // Usa process.cwd() que funciona en ambos sistemas de módulos
     root: process.cwd(),
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ik.imagekit.io',
+        pathname: '/**',
+      },
+    ],
+  },
 };
-
+ 
 export default nextConfig;
